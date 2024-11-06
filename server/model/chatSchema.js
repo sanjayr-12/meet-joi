@@ -6,16 +6,14 @@ const chatSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    messages: [
-      {
-        ai: {
-          type: String,
-        },
-        user: {
-          type: String,
-        },
+    messages: {
+      user: {
+        type: String,
       },
-    ],
+      ai: {
+        type: String,
+      },
+    },
   },
   { timestamps: true }
 );

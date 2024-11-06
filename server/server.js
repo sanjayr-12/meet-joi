@@ -9,6 +9,7 @@ import { connectDB } from "./db/db.js";
 configDotenv();
 
 
+
 const app = express();
 app.use(
   cors({
@@ -16,6 +17,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.json())
 app.use(clerkMiddleware());
 
 app.use("/api/chat", protectedRoutes, chatRouter);

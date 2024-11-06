@@ -4,6 +4,6 @@ import { ChatAi } from "../controller/chat.controller.js"
 const router = express.Router()
 
 
-router.get("/", ChatAi)
+router.post("/", ChatAi)
 
 export default router

@@ -1,18 +1,8 @@
 import { UserButton } from "@clerk/clerk-react";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Chat = () => {
-  const handleClick = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/api/chat", {
-        withCredentials: true,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const [message, setMessage] = useState(null)
   useEffect(() => {
     async function user() {
       try {
@@ -29,11 +19,32 @@ const Chat = () => {
     user();
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formdata = new FormData(e.target as HTMLFormElement);
+    const prompt = formdata.get("prompt");
+    try {
+      const response = await axios.post(
+        "/api/chat/",
+        { prompt },
+        { withCredentials: true }
+      );
+      setMessage(response.data.response)
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      Chat
       <UserButton />
-      <button onClick={handleClick}>request</button>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="prompt" />
+        <br />
+        <input type="submit" />
+      </form>
+      {message}
     </div>
   );
 };

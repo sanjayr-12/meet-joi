@@ -1,5 +1,6 @@
 import { UserButton } from "@clerk/clerk-react";
 import axios from "axios";
+import { useEffect } from "react";
 const Chat = () => {
   const handleClick = async () => {
     try {
@@ -11,6 +12,22 @@ const Chat = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    async function user() {
+      try {
+        const addUser = await axios.post(
+          "/api/user/login",
+          {},
+          { withCredentials: true }
+        );
+        console.log(addUser);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    user();
+  }, []);
 
   return (
     <div>

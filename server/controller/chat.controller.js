@@ -7,9 +7,9 @@ export const ChatAi = async (req, res) => {
   const { userId } = req.auth;
   try {
     const response = await GenerateContent(prompt, userId);
-      const checkUser = await userModel.findOne({ userId });
-      console.log(prompt);
-      
+    const checkUser = await userModel.findOne({ userId });
+    console.log(prompt);
+
     if (checkUser) {
       const chatData = {
         user: prompt,
@@ -20,10 +20,23 @@ export const ChatAi = async (req, res) => {
         messages: chatData,
       });
       await newChat.save();
-      return res.status(200).json({ message: "saved", response });
+      return res.status(200).json(newChat);
     }
     return res.status(400).json({ error: "something went wrong" });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const getAll = async (req, res) => {
+  try {
+    const { userId } = req.auth;
+    const messages = await chatModel.find({ userId }).lean().select("messages"); 
+    if (!messages || messages.length === 0) {
+      return res.status(400).json({ error: "Problem in retrieving chats" });
+    }
+    res.status(200).json({ messages });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error " + error.message });
   }
 };

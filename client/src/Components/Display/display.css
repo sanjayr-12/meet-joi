@@ -1,0 +1,14 @@
+.display-container {
+  height: 100%;
+}
+
+.child-display-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.child-display-container p.user {
+  align-self: end;
+}

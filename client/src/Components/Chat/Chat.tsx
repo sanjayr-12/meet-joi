@@ -1,8 +1,9 @@
-import { UserButton } from "@clerk/clerk-react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Nav from "../Nav/Nav";
+import "./chat.css";
 const Chat = () => {
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
   useEffect(() => {
     async function user() {
       try {
@@ -29,7 +30,7 @@ const Chat = () => {
         { prompt },
         { withCredentials: true }
       );
-      setMessage(response.data.response)
+      setMessage(response.data.response);
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -37,14 +38,16 @@ const Chat = () => {
   };
 
   return (
-    <div>
-      <UserButton />
+    <div className="chat-container">
+      <div>
+        <Nav />
+      </div>
+      <p>{ message}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="prompt" />
         <br />
         <input type="submit" />
       </form>
-      {message}
     </div>
   );
 };

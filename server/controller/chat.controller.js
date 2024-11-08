@@ -31,7 +31,7 @@ export const ChatAi = async (req, res) => {
 export const getAll = async (req, res) => {
   try {
     const { userId } = req.auth;
-    const messages = await chatModel.find({ userId }).lean().select("messages"); 
+    const messages = await chatModel.find({ userId }).lean().select("messages");
     if (!messages || messages.length === 0) {
       return res.status(400).json({ error: "Problem in retrieving chats" });
     }

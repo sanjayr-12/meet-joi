@@ -1,10 +1,9 @@
-import express from "express"
-import { ChatAi, getAll } from "../controller/chat.controller.js"
+import express from "express";
+import { ChatAi, getAll } from "../controller/chat.controller.js";
 
-const router = express.Router()
+const router = express.Router();
 
+router.post("/post", ChatAi);
+router.get("/", getAll);
 
-router.post("/post", ChatAi)
-router.get("/", getAll)
-
-export default router
+export default router;

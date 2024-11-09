@@ -73,7 +73,8 @@ const Chat = () => {
           type="text"
           name="prompt"
           onChange={(e) => setInput(e.target.value)}
-          value={input} required
+          value={input}
+          required
         />
         <br />
         <input

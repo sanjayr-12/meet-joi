@@ -1,10 +1,9 @@
 export type message = {
-    ai: string,
-    user:string
-}
+  ai: string;
+  user: string;
+};
 
 export type chat = {
-    messages: message,
-    _id:string
-}
-
+  messages: message;
+  _id: string;
+};

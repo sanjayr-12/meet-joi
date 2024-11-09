@@ -34,9 +34,10 @@ async function GenerateContent(prompt, userId) {
   try {
     const history = await chatModel.find({ userId }).select("messages");
 
-      const summary = await model.generateContent(process.env.UTIL_TEXT2 + history);
-      console.log(summary.response.text());
-      
+    const summary = await model.generateContent(
+      process.env.UTIL_TEXT2 + history
+    );
+    console.log(summary.response.text());
 
     const result = await model.generateContent(
       process.env.UTIL_TEXT + " " + summary.response.text() + " " + prompt

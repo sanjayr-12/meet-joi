@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import Nav from "../Nav/Nav";
 import "./chat.css";
 import Display from "../Display/Display";
+import useStore from "../../store/zustand.ts";
 
 const Chat = () => {
   const [message, setMessage] = useState([]);
-  const [render, setRender] = useState(0);
+  // const [render, setRender] = useState(0);
   const [disable, setDisable] = useState(false);
   const [input, setInput] = useState("");
+  const render = useStore((state) => state.render);
+  const setRender = useStore((state) => state.setRender);
   useEffect(() => {
     async function user() {
       try {
@@ -49,8 +52,7 @@ const Chat = () => {
         { prompt },
         { withCredentials: true }
       );
-
-      setRender(render + 1);
+      setRender()
       console.log(response.data);
     } catch (error) {
       console.log(error);

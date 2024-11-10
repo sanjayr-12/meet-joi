@@ -32,10 +32,23 @@ export const getAll = async (req, res) => {
   try {
     const { userId } = req.auth;
     const messages = await chatModel.find({ userId }).lean().select("messages");
-    if (!messages || messages.length === 0) {
-      return res.status(400).json({ error: "Problem in retrieving chats" });
+    if (!messages) {
+      return res.status(400).json({ error: "error in retriving chats" });
     }
     res.status(200).json({ messages });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error " + error.message });
+  }
+};
+
+export const deleteChat = async (req, res) => {
+  try {
+    const { userId } = req.auth;
+    const response = await chatModel.deleteMany({ userId });
+    if (!response) {
+      return res.status(400).json({ error: "problem in deleting" });
+    }
+    res.status(200).json({ message: "deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal server error " + error.message });
   }

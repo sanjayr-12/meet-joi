@@ -21,8 +21,10 @@ const Nav = () => {
       } finally {
         setDel(false);
       }
+    } else if (confrim?.includes(" ")) {
+      alert("Remove the Spaces");
     } else {
-      alert("Incorrect Code!!!");
+      alert("Incorrect!!");
     }
   };
   return (
